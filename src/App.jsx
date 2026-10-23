@@ -18,7 +18,7 @@ export default function App() {
   const [showQRModal, setShowQRModal] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // Helper to get base numerical price for sorting
+  // Helper to extract numeric price for sorting
   const getItemBasePrice = (item) => {
     if (item.pricingType === 'portion' && item.portions && item.portions.length > 0) {
       return Number(item.portions[0].price);
@@ -26,7 +26,7 @@ export default function App() {
     return Number(item.price) || 0;
   };
 
-  // Has active filters
+  // Has active search or filters
   const hasActiveFilters = Boolean(
     searchQuery.trim() !== '' || dietFilter !== 'all' || sortOption !== 'default'
   );
@@ -47,7 +47,7 @@ export default function App() {
         if (dietFilter === 'veg' && !item.isVeg) return false;
         if (dietFilter === 'nonveg' && item.isVeg) return false;
 
-        // Search filter (name and category)
+        // Search filter (dish name or category name)
         if (!query) return true;
         const matchesName = item.name.toLowerCase().includes(query);
         const matchesCategory = cat.name.toLowerCase().includes(query);
@@ -72,7 +72,7 @@ export default function App() {
     }).filter((cat) => cat.matchingItems.length > 0);
   }, [searchQuery, dietFilter, sortOption]);
 
-  // Total visible items counter
+  // Total count of visible items
   const totalVisibleItems = useMemo(() => {
     return filteredCategories.reduce((acc, cat) => acc + cat.matchingItems.length, 0);
   }, [filteredCategories]);
@@ -82,30 +82,29 @@ export default function App() {
     setActiveCategory(categoryId);
     const element = document.getElementById(categoryId);
     if (element) {
-      const yOffset = -150; // account for sticky nav height
+      const yOffset = -160; // offset for sticky toolbar
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
 
-  // ScrollSpy & Scroll-to-Top visibility
+  // ScrollSpy & Back-to-Top visibility
   useEffect(() => {
     const handleScroll = () => {
-      // Toggle back to top visibility
       if (window.scrollY > 400) {
         setShowScrollTop(true);
       } else {
         setShowScrollTop(false);
       }
 
-      if (searchQuery) return; // avoid jitter while actively typing search
+      if (searchQuery) return; // avoid jitter during active text search
 
       const categoryElements = MENU_CATEGORIES.map((c) => ({
         id: c.id,
         el: document.getElementById(c.id)
       })).filter((c) => c.el !== null);
 
-      const scrollPosition = window.scrollY + 200;
+      const scrollPosition = window.scrollY + 220;
 
       for (let i = categoryElements.length - 1; i >= 0; i--) {
         const item = categoryElements[i];
@@ -129,11 +128,11 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-trellis">
-      {/* Restaurant Header */}
+    <div className="min-h-screen flex flex-col bg-[#070d18]">
+      {/* Compact Restaurant Header */}
       <Header onOpenQR={() => setShowQRModal(true)} />
 
-      {/* Sticky Category & Search Navigation */}
+      {/* Sticky Filter & Category Navigation Toolbar */}
       <StickyNav
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -147,27 +146,27 @@ export default function App() {
         onResetFilters={handleResetFilters}
       />
 
-      {/* Main Content Area */}
-      <main className="flex-1 mx-auto w-full max-w-4xl px-3.5 sm:px-6 py-4">
+      {/* Main Content Area with generous bottom padding so floating bar never covers items */}
+      <main className="flex-1 mx-auto w-full max-w-3xl px-3 sm:px-4 py-4 pb-36 sm:pb-24">
         
         {/* Results Banner when filtering or searching */}
         {hasActiveFilters && (
-          <div className="mb-4 flex items-center justify-between p-3.5 rounded-xl border border-[#dfbd75]/30 bg-[#081324] text-xs sm:text-sm text-[#a4b6cd]">
-            <div>
+          <div className="mb-4 flex items-center justify-between p-3 rounded-xl border border-[#dfbd75]/25 bg-[#091527] text-xs sm:text-sm text-[#9bb0c9]">
+            <div className="truncate mr-2">
               <span>
-                Showing <strong className="text-[#f5e4b8] font-bold">{totalVisibleItems}</strong> items
+                Showing <strong className="text-[#f5e4b8] font-bold">{totalVisibleItems}</strong> dishes
               </span>
               {searchQuery && (
                 <span> for "<strong className="text-[#fbf9f4]">{searchQuery}</strong>"</span>
               )}
               {dietFilter !== 'all' && (
-                <span className="ml-1 text-[#dfbd75]">
-                  • {dietFilter === 'veg' ? 'Pure Vegetarian' : 'Non-Vegetarian'}
+                <span className="text-[#dfbd75] ml-1">
+                  • {dietFilter === 'veg' ? 'Veg Only' : 'Non-Veg Only'}
                 </span>
               )}
               {sortOption !== 'default' && (
-                <span className="ml-1 text-[#dfbd75]">
-                  • {sortOption === 'price-asc' ? 'Price: Low to High' : 'Price: High to Low'}
+                <span className="text-[#dfbd75] ml-1">
+                  • {sortOption === 'price-asc' ? 'Low to High' : 'High to Low'}
                 </span>
               )}
             </div>
@@ -175,7 +174,7 @@ export default function App() {
             <button
               type="button"
               onClick={handleResetFilters}
-              className="inline-flex items-center gap-1 text-[#dfbd75] hover:text-[#fbf9f4] font-semibold cursor-pointer shrink-0 ml-2"
+              className="inline-flex items-center gap-1 text-[#dfbd75] hover:text-[#fbf9f4] font-semibold cursor-pointer shrink-0"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset</span>
@@ -183,7 +182,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Categories & Dish Lists */}
+        {/* Categories & Dish Lists (Antilia Layout Quality) */}
         {filteredCategories.length > 0 ? (
           filteredCategories.map((category) => (
             <CategorySection
@@ -194,23 +193,23 @@ export default function App() {
             />
           ))
         ) : (
-          /* Helpful Empty Search State */
+          /* Empty Search State */
           <div className="py-20 text-center">
-            <div className="mx-auto w-16 h-16 rounded-full border border-[#dfbd75]/40 bg-[#091527] flex items-center justify-center text-2xl mb-4 shadow-lg">
+            <div className="mx-auto w-14 h-14 rounded-full border border-[#dfbd75]/35 bg-[#091527] flex items-center justify-center text-xl mb-3 shadow-md">
               🍽️
             </div>
-            <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-[#f5e4b8] uppercase tracking-wide">
+            <h3 className="font-cinzel text-lg sm:text-xl font-bold text-[#f5e4b8] uppercase tracking-wide">
               No Dishes Found
             </h3>
-            <p className="text-sm text-[#9bb0c9] mt-2 max-w-md mx-auto">
-              We couldn't find any dish matching "<span className="text-[#fbf9f4] font-semibold">{searchQuery}</span>" with the selected filters.
+            <p className="text-xs sm:text-sm text-[#8fa3bd] mt-1.5 max-w-sm mx-auto">
+              No menu items match "<span className="text-[#fbf9f4] font-medium">{searchQuery}</span>" with the selected filters.
             </p>
             <button
               type="button"
               onClick={handleResetFilters}
-              className="mt-5 px-5 py-2.5 rounded-xl border border-[#dfbd75]/60 bg-gradient-to-r from-[#dfbd75] to-[#c5a059] text-xs sm:text-sm font-bold text-[#091322] shadow hover:brightness-110 transition-all cursor-pointer min-h-[44px]"
+              className="mt-4 px-4 py-2 rounded-xl border border-[#dfbd75]/60 bg-gradient-to-r from-[#dfbd75] to-[#c5a059] text-xs sm:text-sm font-bold text-[#091322] shadow hover:brightness-110 transition-all cursor-pointer min-h-[40px]"
             >
-              Clear All Filters & Show Full Menu
+              Clear All Filters
             </button>
           </div>
         )}
@@ -224,16 +223,16 @@ export default function App() {
         onOpenQR={() => setShowQRModal(true)}
       />
 
-      {/* Desktop / Tablet Floating Back-to-Top Button */}
+      {/* Floating Back to Top Button */}
       {showScrollTop && (
         <button
           type="button"
           onClick={scrollToTop}
-          className="hidden sm:flex fixed bottom-6 right-6 z-30 p-3 rounded-full border border-[#dfbd75]/40 bg-[#091527]/90 text-[#f5e4b8] hover:bg-[#dfbd75] hover:text-[#091322] shadow-2xl transition-all cursor-pointer items-center justify-center min-h-[44px] min-w-[44px]"
+          className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-30 p-2.5 sm:p-3 rounded-full border border-[#dfbd75]/40 bg-[#091527]/90 text-[#f5e4b8] hover:bg-[#dfbd75] hover:text-[#091322] shadow-xl transition-all cursor-pointer flex items-center justify-center min-h-[40px] min-w-[40px]"
           title="Back to Top"
           aria-label="Back to Top"
         >
-          <ArrowUp className="w-5 h-5" />
+          <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       )}
 

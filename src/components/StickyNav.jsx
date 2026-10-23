@@ -30,52 +30,52 @@ export default function StickyNav({
   }, [activeCategory]);
 
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-[#dfbd75]/25 bg-[#060c18]/95 backdrop-blur-xl shadow-xl transition-all">
-      <div className="mx-auto max-w-4xl px-3.5 sm:px-6 pt-3 pb-2.5 space-y-2.5">
+    <nav className="sticky top-0 z-40 w-full border-b border-[#dfbd75]/20 bg-[#060c18]/95 backdrop-blur-xl shadow-lg">
+      <div className="mx-auto max-w-3xl px-3 sm:px-4 pt-2.5 pb-2 space-y-2">
         
-        {/* ROW 1: Search Bar & Price Sort Dropdown */}
+        {/* ROW 1: Search Bar & Sort Dropdown */}
         <div className="flex items-center gap-2">
           {/* Live Search Input */}
           <div className="relative flex-1">
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#dfbd75]" />
+            <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#dfbd75]/70" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search dishes (momos, burgers, pizza...)"
-              className="w-full rounded-xl border border-[#dfbd75]/30 bg-[#091527] pl-10 pr-9 py-2.5 text-sm sm:text-base text-[#fbf9f4] placeholder-[#798ea6] focus:border-[#dfbd75] focus:outline-none focus:ring-2 focus:ring-[#dfbd75]/30 transition-all font-sans min-h-[44px]"
+              placeholder="Search momos, burgers, pizzas..."
+              className="w-full rounded-xl border border-[#dfbd75]/25 bg-[#091527] pl-9 pr-8 py-2 text-xs sm:text-sm text-[#fbf9f4] placeholder-[#6e839e] focus:border-[#dfbd75] focus:outline-none focus:ring-1 focus:ring-[#dfbd75]/40 transition-all font-sans min-h-[40px]"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 text-[#9eacbf] hover:text-[#fbf9f4] cursor-pointer"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-[#9bb0c9] hover:text-[#fbf9f4] cursor-pointer"
                 title="Clear search"
                 aria-label="Clear search"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
 
-          {/* Price Sort Control */}
-          <div className="relative shrink-0">
-            <div className="flex items-center rounded-xl border border-[#dfbd75]/30 bg-[#091527] px-2.5 py-1 min-h-[44px]">
-              <ArrowUpDown className="w-4 h-4 text-[#dfbd75] mr-1.5 shrink-0" />
+          {/* Price Sort Dropdown */}
+          <div className="shrink-0">
+            <div className="flex items-center rounded-xl border border-[#dfbd75]/25 bg-[#091527] px-2.5 py-1 min-h-[40px]">
+              <ArrowUpDown className="w-3.5 h-3.5 text-[#dfbd75] mr-1.5 shrink-0" />
               <select
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value)}
-                className="bg-transparent text-xs sm:text-sm text-[#f5e4b8] font-semibold focus:outline-none cursor-pointer pr-1"
+                className="bg-transparent text-xs text-[#f5e4b8] font-semibold focus:outline-none cursor-pointer"
                 aria-label="Sort dishes by price"
               >
                 <option value="default" className="bg-[#091527] text-[#fbf9f4]">
                   Default Order
                 </option>
                 <option value="price-asc" className="bg-[#091527] text-[#fbf9f4]">
-                  Price: Low to High (₹ ↑)
+                  Price: Low to High
                 </option>
                 <option value="price-desc" className="bg-[#091527] text-[#fbf9f4]">
-                  Price: High to Low (₹ ↓)
+                  Price: High to Low
                 </option>
               </select>
             </div>
@@ -83,14 +83,15 @@ export default function StickyNav({
         </div>
 
         {/* ROW 2: Dietary Filter Pills & Reset Button */}
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <div className="flex items-center gap-1.5 p-1 rounded-xl border border-[#dfbd75]/20 bg-[#071120]">
+        <div className="flex items-center justify-between gap-2">
+          {/* Dietary Segmented Controls */}
+          <div className="flex items-center gap-1 p-0.5 rounded-lg border border-[#dfbd75]/20 bg-[#071120]">
             <button
               type="button"
               onClick={() => setDietFilter('all')}
-              className={`px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg transition-all cursor-pointer min-h-[36px] ${
+              className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer min-h-[32px] ${
                 dietFilter === 'all'
-                  ? 'bg-[#dfbd75] text-[#091322] shadow'
+                  ? 'bg-[#dfbd75] text-[#091322] shadow-sm'
                   : 'text-[#9bb0c9] hover:text-[#fbf9f4]'
               }`}
             >
@@ -100,48 +101,48 @@ export default function StickyNav({
             <button
               type="button"
               onClick={() => setDietFilter('veg')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg transition-all cursor-pointer min-h-[36px] ${
+              className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer min-h-[32px] ${
                 dietFilter === 'veg'
-                  ? 'bg-emerald-600 text-white shadow'
+                  ? 'bg-emerald-600 text-white shadow-sm'
                   : 'text-[#9bb0c9] hover:text-emerald-400'
               }`}
             >
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block shadow-sm"></span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block shadow-sm"></span>
               <span>Pure Veg</span>
             </button>
 
             <button
               type="button"
               onClick={() => setDietFilter('nonveg')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg transition-all cursor-pointer min-h-[36px] ${
+              className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer min-h-[32px] ${
                 dietFilter === 'nonveg'
-                  ? 'bg-red-700 text-white shadow'
+                  ? 'bg-red-700 text-white shadow-sm'
                   : 'text-[#9bb0c9] hover:text-red-400'
               }`}
             >
-              <span className="w-2.5 h-2.5 rounded-full bg-red-400 inline-block shadow-sm"></span>
+              <span className="w-2 h-2 rounded-full bg-red-400 inline-block shadow-sm"></span>
               <span>Non-Veg</span>
             </button>
           </div>
 
-          {/* Reset All Filters button if filters or search are active */}
+          {/* Reset Filters Trigger */}
           {hasActiveFilters && (
             <button
               type="button"
               onClick={onResetFilters}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#dfbd75]/40 bg-[#dfbd75]/10 text-xs text-[#f5e4b8] font-medium hover:bg-[#dfbd75]/20 transition-all cursor-pointer min-h-[36px]"
-              title="Reset search and filters"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-[#dfbd75]/35 bg-[#dfbd75]/10 text-xs text-[#f5e4b8] font-medium hover:bg-[#dfbd75]/20 transition-all cursor-pointer min-h-[32px]"
+              title="Reset all filters"
             >
-              <RotateCcw className="w-3.5 h-3.5 text-[#dfbd75]" />
-              <span>Clear Filters</span>
+              <RotateCcw className="w-3 h-3 text-[#dfbd75]" />
+              <span>Clear</span>
             </button>
           )}
         </div>
 
-        {/* ROW 3: Horizontal Category Navigation Rail */}
+        {/* ROW 3: Horizontal Scrollable Category Rail */}
         <div
           ref={categoryScrollRef}
-          className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-1 pb-1 scroll-smooth"
+          className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-0.5 pb-0.5 scroll-smooth"
         >
           {MENU_CATEGORIES.map((category) => {
             const isActive = activeCategory === category.id;
@@ -151,17 +152,17 @@ export default function StickyNav({
                 data-category={category.id}
                 onClick={() => onSelectCategory(category.id)}
                 type="button"
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-full border text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer shrink-0 min-h-[44px] ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-bold whitespace-nowrap transition-all cursor-pointer shrink-0 min-h-[36px] ${
                   isActive
-                    ? 'border-[#dfbd75] bg-gradient-to-r from-[#dfbd75]/30 to-[#dfbd75]/15 text-[#fbf9f4] shadow-[0_0_15px_rgba(223,189,117,0.3)] ring-1 ring-[#dfbd75]'
-                    : 'border-[#dfbd75]/20 bg-[#0a1628] text-[#a4b4cc] hover:border-[#dfbd75]/50 hover:text-[#fbf9f4]'
+                    ? 'border-[#dfbd75] bg-[#dfbd75]/25 text-[#fbf9f4] shadow-sm'
+                    : 'border-[#dfbd75]/15 bg-[#091527] text-[#9bb0c9] hover:border-[#dfbd75]/40 hover:text-[#fbf9f4]'
                 }`}
               >
                 {category.icon && (
                   <img
                     src={category.icon}
                     alt=""
-                    className="w-5 h-5 rounded-full object-cover shrink-0 border border-[#dfbd75]/30"
+                    className="w-4 h-4 rounded-full object-cover shrink-0"
                     loading="lazy"
                   />
                 )}

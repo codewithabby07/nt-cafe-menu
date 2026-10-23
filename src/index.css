@@ -1,20 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --bg-deep: #050a14;
-  --bg-base: #081120;
-  --bg-surface: #0c182c;
-  --bg-card: #0f2038;
-  --bg-card-hover: #142846;
+  --bg-deep: #070d18;
+  --bg-base: #0b1424;
+  --bg-surface: #0f1c32;
+  --bg-card: #111f38;
+  --bg-card-hover: #162846;
   --gold-primary: #dfbd75;
   --gold-light: #f5e4b8;
   --gold-dark: #b69043;
-  --gold-border: rgba(223, 189, 117, 0.3);
-  --gold-border-subtle: rgba(223, 189, 117, 0.16);
-  --gold-glow: rgba(223, 189, 117, 0.15);
+  --gold-border: rgba(223, 189, 117, 0.28);
+  --gold-border-subtle: rgba(223, 189, 117, 0.14);
   --text-main: #fbf9f4;
-  --text-muted: #a4b4cc;
-  --text-subtle: #74869e;
+  --text-muted: #9bb0c9;
+  --text-subtle: #6d8199;
   --veg-color: #22c55e;
   --nonveg-color: #ef4444;
 }
@@ -36,23 +35,17 @@ html {
 
 body {
   min-height: 100vh;
-  background: 
-    radial-gradient(circle at 50% 0%, rgba(223, 189, 117, 0.09) 0%, transparent 55%),
-    radial-gradient(circle at 100% 40%, rgba(18, 38, 68, 0.6) 0%, transparent 50%),
+  background-color: var(--bg-deep);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(223, 189, 117, 0.08) 0%, transparent 60%),
     linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-base) 100%);
   background-attachment: fixed;
   overflow-x: hidden;
 }
 
-/* Subtle Mughal trellis geometric watermark */
-.bg-trellis {
-  background-image: radial-gradient(rgba(223, 189, 117, 0.04) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
 /* Typography Classes */
 .font-cinzel {
-  font-family: 'Cinzel', serif;
+  font-family: 'Cinzel', Georgia, serif;
   letter-spacing: 0.04em;
 }
 
@@ -66,39 +59,9 @@ body {
 
 /* Gold Gradient Text */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #f5e4b8 25%, #dfbd75 65%, #c5a059 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f5e4b8 35%, #dfbd75 75%, #c5a059 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.text-gold-bright {
-  color: var(--gold-light);
-}
-
-/* Ornate Border & Dividers */
-.border-gold {
-  border: 1px solid var(--gold-border);
-}
-
-.border-gold-subtle {
-  border: 1px solid var(--gold-border-subtle);
-}
-
-.gold-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  width: 100%;
-  margin: 28px 0;
-}
-
-.gold-divider::before,
-.gold-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
 }
 
 /* Hide scrollbars cleanly */
@@ -110,93 +73,77 @@ body {
   scrollbar-width: none;
 }
 
-/* Touch-optimized, Readable Food Card */
-.menu-card {
-  background: linear-gradient(180deg, rgba(15, 32, 56, 0.92) 0%, rgba(10, 20, 36, 0.98) 100%);
-  border: 1px solid var(--gold-border-subtle);
+/* Antilia-Inspired Dish Card */
+.dish-row-card {
+  background: linear-gradient(180deg, #101e36 0%, #0c182b 100%);
+  border: 1px solid rgba(223, 189, 117, 0.16);
   border-radius: 14px;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
-  backdrop-filter: blur(10px);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.18s ease, box-shadow 0.18s ease;
   position: relative;
   overflow: hidden;
 }
 
-.menu-card:hover {
-  border-color: rgba(223, 189, 117, 0.45);
-  box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.6), 0 0 18px -2px rgba(223, 189, 117, 0.15);
+.dish-row-card:hover {
+  border-color: rgba(223, 189, 117, 0.4);
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.5), 0 0 12px -2px rgba(223, 189, 117, 0.12);
   transform: translateY(-2px);
 }
 
-.menu-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(223, 189, 117, 0.4), transparent);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.menu-card:hover::after {
-  opacity: 1;
-}
-
-/* Standard Indian Veg / Non-Veg Indicator badges with comfortable touch bounds */
-.diet-indicator {
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
+/* Standard Dietary Pills (like Antilia Veg / Non-Veg tag) */
+.diet-pill {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
 }
 
-.diet-indicator.veg {
-  border: 2px solid var(--veg-color);
-  background-color: rgba(34, 197, 94, 0.08);
+.diet-pill.veg {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #4ade80;
 }
-.diet-indicator.veg .dot {
-  width: 8px;
-  height: 8px;
+.diet-pill.veg .diet-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background-color: var(--veg-color);
+  background: #22c55e;
 }
 
-.diet-indicator.non-veg {
-  border: 2px solid var(--nonveg-color);
-  background-color: rgba(239, 68, 68, 0.08);
+.diet-pill.non-veg {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
 }
-.diet-indicator.non-veg .dot {
-  width: 8px;
-  height: 8px;
+.diet-pill.non-veg .diet-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background-color: var(--nonveg-color);
+  background: #ef4444;
 }
 
-/* Category Hero Banner */
-.category-hero-card {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--gold-border);
-  background: linear-gradient(135deg, #0e1c31 0%, #081220 100%);
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.7);
+/* Category Header Divider Line (Antilia style) */
+.category-header-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(223, 189, 117, 0.6) 0%, rgba(223, 189, 117, 0.1) 80%, transparent 100%);
 }
 
-/* Minimum Touch Target standard (44px) */
+/* Minimum 44px touch target */
 .touch-target {
   min-height: 44px;
   min-width: 44px;
 }
 
-/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -205,5 +152,5 @@ body {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
