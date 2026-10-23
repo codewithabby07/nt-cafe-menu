@@ -16,7 +16,7 @@ export const MENU_CATEGORIES = [
     name: "Chicken Momos",
     badge: "House Specialty",
     icon: "./assets/cat_momos.png",
-    image: null,
+    image: "./assets/momos.png",
     items: [
       {
         id: "cm-steam",

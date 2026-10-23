@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Star, Sparkles } from 'lucide-react';
+import { Sparkles, ChevronRight } from 'lucide-react';
 
 export default function MenuItemCard({ item, onSelect, categoryName }) {
   // If the item has multiple portions, state tracks the selected portion index
@@ -10,65 +10,68 @@ export default function MenuItemCard({ item, onSelect, categoryName }) {
   const displayPrice = isPortion ? activePortion.price : item.price;
 
   return (
-    <div
+    <article
       onClick={() => onSelect(item, isPortion ? activePortion : null)}
-      className="menu-card p-3.5 sm:p-4 flex flex-col justify-between cursor-pointer group"
+      className="menu-card p-4 sm:p-5 flex flex-col justify-between cursor-pointer group select-none min-h-[140px]"
     >
-      {/* Top Row: Diet indicator + Badges */}
-      <div className="flex items-start justify-between gap-2 mb-2">
-        <div className="flex items-center gap-2">
-          {/* Veg / Non-Veg Indicator */}
-          <div
-            className={`diet-indicator ${item.isVeg ? 'veg' : 'non-veg'}`}
-            title={item.isVeg ? 'Vegetarian' : 'Non-Vegetarian'}
-          >
-            <div className="dot" />
-          </div>
-
-          {/* Special / House Badge */}
-          {item.isSpecial && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-cinzel font-bold bg-[#dfbd75]/20 text-[#f5e4b8] border border-[#dfbd75]/40 tracking-wider">
-              <Sparkles className="w-2.5 h-2.5 text-[#dfbd75]" />
-              NT SPECIAL
-            </span>
-          )}
-
-          {/* Quantity Badge for single items */}
-          {item.quantity && !isPortion && (
-            <span className="px-1.5 py-0.5 rounded bg-[#0b1626] border border-[#dfbd75]/20 text-[11px] text-[#a6b6cc]">
-              {item.quantity}
-            </span>
-          )}
-        </div>
-
-        {/* Price Display */}
-        <div className="text-right">
-          <div className="font-cinzel text-base sm:text-lg font-bold text-[#f5e4b8] tracking-tight">
-            ₹{displayPrice}
-          </div>
-          {isPortion && (
-            <div className="text-[10px] text-[#8e9fb5] font-sans">
-              {activePortion.label}
+      <div>
+        {/* Top Meta Row: Diet indicator + Badges + Price */}
+        <div className="flex items-center justify-between gap-3 mb-2.5">
+          <div className="flex items-center gap-2.5 flex-wrap">
+            {/* Standard Indian Veg / Non-Veg Indicator */}
+            <div
+              className={`diet-indicator ${item.isVeg ? 'veg' : 'non-veg'}`}
+              title={item.isVeg ? 'Pure Vegetarian' : 'Non-Vegetarian'}
+              aria-label={item.isVeg ? 'Pure Vegetarian' : 'Non-Vegetarian'}
+            >
+              <div className="dot" />
             </div>
-          )}
-        </div>
-      </div>
 
-      {/* Dish Name */}
-      <div className="mb-3">
-        <h3 className="font-editorial text-lg sm:text-xl font-semibold text-[#f8f6f0] group-hover:text-[#dfbd75] transition-colors leading-snug">
+            {/* Special / House Badge */}
+            {item.isSpecial && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[11px] font-cinzel font-bold bg-[#dfbd75]/20 text-[#f5e4b8] border border-[#dfbd75]/40 tracking-wider">
+                <Sparkles className="w-3 h-3 text-[#dfbd75]" />
+                NT SPECIAL
+              </span>
+            )}
+
+            {/* Quantity Badge for single items */}
+            {item.quantity && !isPortion && (
+              <span className="px-2 py-0.5 rounded-md bg-[#091424] border border-[#dfbd75]/25 text-xs font-medium text-[#c0cfdf]">
+                {item.quantity}
+              </span>
+            )}
+          </div>
+
+          {/* Primary Price Display - Large, High Contrast (16-18px) */}
+          <div className="text-right shrink-0">
+            <span className="font-cinzel text-lg sm:text-xl font-extrabold text-[#f5e4b8] tracking-tight">
+              ₹{displayPrice}
+            </span>
+            {isPortion && (
+              <div className="text-[11px] text-[#9bb0c9] font-medium tracking-wide">
+                {activePortion.label}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Dish Name - Large & Highly Readable (17-18px) */}
+        <h3 className="font-editorial text-[18px] sm:text-[19px] font-bold text-[#fbf9f4] group-hover:text-[#dfbd75] transition-colors leading-relaxed tracking-wide">
           {item.name}
         </h3>
       </div>
 
-      {/* Portion Switcher for portion-based items */}
+      {/* Bottom Area: Portion Switcher or Category Tag */}
       {isPortion ? (
         <div
           onClick={(e) => e.stopPropagation()}
-          className="mt-auto pt-2 border-t border-[#dfbd75]/15 flex items-center justify-between gap-1.5"
+          className="mt-3.5 pt-3 border-t border-[#dfbd75]/20 flex flex-col xs:flex-row items-stretch xs:items-center justify-between gap-2"
         >
-          <span className="text-[11px] text-[#8e9fb5] uppercase tracking-wider font-sans">Portion:</span>
-          <div className="inline-flex rounded-lg border border-[#dfbd75]/25 bg-[#091424] p-0.5">
+          <span className="text-xs text-[#9bb0c9] uppercase tracking-wider font-sans font-semibold">
+            Choose Portion:
+          </span>
+          <div className="grid grid-cols-2 gap-1.5 p-1 rounded-xl border border-[#dfbd75]/30 bg-[#07101d]">
             {item.portions.map((portion, idx) => {
               const isSelected = selectedPortionIdx === idx;
               return (
@@ -79,26 +82,27 @@ export default function MenuItemCard({ item, onSelect, categoryName }) {
                     e.stopPropagation();
                     setSelectedPortionIdx(idx);
                   }}
-                  className={`px-2 py-1 text-[11px] rounded-md transition-all cursor-pointer font-medium ${
+                  className={`px-3 py-2 text-xs rounded-lg transition-all cursor-pointer font-semibold min-h-[38px] text-center ${
                     isSelected
-                      ? 'bg-[#dfbd75] text-[#091322] font-semibold shadow'
-                      : 'text-[#9eacbf] hover:text-[#f8f6f0]'
+                      ? 'bg-gradient-to-r from-[#dfbd75] to-[#c5a059] text-[#091322] shadow-md scale-[1.02]'
+                      : 'text-[#a2b4cc] hover:text-[#fbf9f4] hover:bg-[#0e1c31]'
                   }`}
                 >
-                  {portion.label} • ₹{portion.price}
+                  <span>{portion.label}</span>
+                  <span className="ml-1 opacity-90 font-cinzel">₹{portion.price}</span>
                 </button>
               );
             })}
           </div>
         </div>
       ) : (
-        <div className="mt-auto pt-2 border-t border-[#dfbd75]/10 flex items-center justify-between text-[11px] text-[#788a9f]">
-          <span>{categoryName}</span>
-          <span className="text-[#dfbd75] group-hover:translate-x-0.5 transition-transform">
-            Tap for details →
+        <div className="mt-3.5 pt-2.5 border-t border-[#dfbd75]/15 flex items-center justify-between text-xs text-[#8aa0b9]">
+          <span className="tracking-wide">{categoryName}</span>
+          <span className="inline-flex items-center gap-0.5 text-[#dfbd75] font-medium group-hover:translate-x-1 transition-transform">
+            View details <ChevronRight className="w-3.5 h-3.5" />
           </span>
         </div>
       )}
-    </div>
+    </article>
   );
 }
