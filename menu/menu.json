@@ -1,0 +1,154 @@
+{
+  "restaurant": {
+    "name": "NT CAFÉ (FOOD HUB)",
+    "tagline": "Made with heart served with love",
+    "established": 2026,
+    "address": "Sir Syed Nagar, Near Nadeem Tarin Hall, Civil Lines, Aligarh",
+    "phone": [
+      "9045008193",
+      "8449173585"
+    ],
+    "free_home_delivery": true
+  },
+  "categories": [
+    {
+      "name": "Chicken Momos",
+      "items": [
+        {
+          "name": "Chicken Steam Momos",
+          "pricing": { "Half (5pcs)": 80, "Full (10pcs)": 150 }
+        },
+        {
+          "name": "Chicken Fried Momos",
+          "pricing": { "Half (5pcs)": 90, "Full (10pcs)": 170 }
+        },
+        {
+          "name": "Chicken Kurkure Momos",
+          "pricing": { "Half (5pcs)": 100, "Full (10pcs)": 200 }
+        },
+        {
+          "name": "Chicken Tandoori Creamy Momos",
+          "pricing": { "Half (5pcs)": 100, "Full (10pcs)": 200 }
+        }
+      ]
+    },
+    {
+      "name": "Sandwiches",
+      "items": [
+        {
+          "name": "Veg Grilled Sandwich",
+          "pricing": { "2pcs": 60, "4pcs": 110 }
+        },
+        {
+          "name": "Grilled Paneer & Corn Sandwich",
+          "pricing": { "2pcs": 80, "4pcs": 150 }
+        },
+        {
+          "name": "Chicken Grilled Sandwich",
+          "pricing": { "2pcs": 70, "4pcs": 130 }
+        },
+        {
+          "name": "Chicken Tandoori Sandwich",
+          "pricing": { "2pcs": 80, "4pcs": 150 }
+        }
+      ]
+    },
+    {
+      "name": "Fries",
+      "items": [
+        {
+          "name": "French Fries",
+          "pricing": { "Half": 50, "Full": 80 }
+        },
+        {
+          "name": "Peri Peri Fries",
+          "pricing": { "Half": 70, "Full": 120 }
+        },
+        {
+          "name": "Cheese Loaded Fries",
+          "pricing": { "Half": 100, "Full": 180 }
+        },
+        {
+          "name": "Chicken Loaded Fries",
+          "pricing": { "Half": 130, "Full": 240 }
+        }
+      ]
+    },
+    {
+      "name": "Crispy Snacks",
+      "items": [
+        {
+          "name": "Chicken Nuggets",
+          "quantity": "5pcs",
+          "price": 100
+        },
+        {
+          "name": "Chicken Popcorn",
+          "quantity": "10pcs",
+          "price": 100
+        },
+        {
+          "name": "Chicken Strips",
+          "quantity": "4pcs",
+          "price": 120
+        },
+        {
+          "name": "NT Special Chicken Cheeza",
+          "quantity": "2pcs",
+          "price": 250
+        }
+      ]
+    },
+    {
+      "name": "Wraps",
+      "items": [
+        { "name": "Veg Wrap", "price": 60 },
+        { "name": "Grilled Paneer Wrap", "price": 80 },
+        { "name": "Chicken Grilled Wrap", "price": 80 },
+        { "name": "Chicken Tandoori Wrap", "price": 90 }
+      ]
+    },
+    {
+      "name": "Burgers",
+      "items": [
+        { "name": "Veg Aloo Tikki Burger", "price": 50 },
+        { "name": "Veg Cheese Burger", "price": 60 },
+        { "name": "Chicken Grilled Burger", "price": 70 },
+        { "name": "Chicken Cheese Burger", "price": 90 },
+        { "name": "Chicken Tandoori Burger", "price": 90 },
+        { "name": "NT Ultimate Chicken Burger", "price": 130 }
+      ]
+    },
+    {
+      "name": "Pizza",
+      "items": [
+        { "name": "Veg Cheese Pizza", "price": 150 },
+        { "name": "Margherita Pizza", "price": 150 },
+        { "name": "Chicken Cheese Pizza", "price": 180 },
+        { "name": "Chicken Tandoori Pizza", "price": 190 },
+        { "name": "Paneer & Corn Pizza", "price": 200 }
+      ]
+    },
+    {
+      "name": "Beverages",
+      "items": [
+        { "name": "Strawberry Shake", "price": 60 },
+        { "name": "Mango Shake", "price": 60 },
+        { "name": "Banana Shake", "price": 60 },
+        { "name": "Oreo Shake", "price": 60 },
+        { "name": "Lassi", "price": 60 },
+        { "name": "Mint Mojito", "price": 60 },
+        { "name": "Blue Mojito", "price": 60 },
+        { "name": "Strawberry Mojito", "price": 60 }
+      ]
+    },
+    {
+      "name": "Tea & Coffee",
+      "items": [
+        { "name": "Hot Coffee", "price": 30 },
+        { "name": "Cold Coffee", "price": 60 },
+        { "name": "Kulhad Tea", "price": 20 }
+      ]
+    }
+  ]
+}

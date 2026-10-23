@@ -1,0 +1,190 @@
+@import "tailwindcss";
+
+:root {
+  --bg-deep: #060c17;
+  --bg-base: #091322;
+  --bg-surface: #0e1c31;
+  --bg-card: #12223a;
+  --bg-card-alt: #162844;
+  --gold-primary: #dfbd75;
+  --gold-light: #f5e4b8;
+  --gold-dark: #b69043;
+  --gold-border: rgba(223, 189, 117, 0.28);
+  --gold-border-subtle: rgba(223, 189, 117, 0.14);
+  --gold-glow: rgba(223, 189, 117, 0.12);
+  --text-main: #f9f8f5;
+  --text-muted: #9eacbf;
+  --text-subtle: #687991;
+  --veg-color: #22c55e;
+  --nonveg-color: #f87171;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+}
+
+body {
+  min-height: 100vh;
+  background: 
+    radial-gradient(circle at 50% 0%, rgba(223, 189, 117, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 100% 50%, rgba(20, 40, 70, 0.5) 0%, transparent 50%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-base) 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* Subtle Mughal trellis geometric watermark */
+.bg-trellis {
+  background-image: radial-gradient(rgba(223, 189, 117, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Typography Classes */
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.04em;
+}
+
+.font-editorial {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-sans {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Gold Gradient Text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #f5e4b8 0%, #dfbd75 50%, #b89348 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-bright {
+  color: var(--gold-primary);
+}
+
+/* Ornate Border & Dividers */
+.border-gold {
+  border: 1px solid var(--gold-border);
+}
+
+.border-gold-subtle {
+  border: 1px solid var(--gold-border-subtle);
+}
+
+.gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  margin: 14px 0;
+}
+
+.gold-divider::before,
+.gold-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
+}
+
+/* Horizontal Category Navigation Scrollbar Hiding */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Tasteful Food Card Styling */
+.menu-card {
+  background: linear-gradient(180deg, rgba(18, 34, 58, 0.85) 0%, rgba(12, 24, 42, 0.95) 100%);
+  border: 1px solid var(--gold-border-subtle);
+  border-radius: 12px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-card:hover {
+  border-color: rgba(223, 189, 117, 0.45);
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.5), 0 0 16px -2px rgba(223, 189, 117, 0.15);
+  transform: translateY(-2px);
+}
+
+.menu-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(223, 189, 117, 0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.menu-card:hover::after {
+  opacity: 1;
+}
+
+/* Veg / Non-Veg Indicator badges */
+.diet-indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.diet-indicator.veg {
+  border: 1.5px solid var(--veg-color);
+}
+.diet-indicator.veg .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--veg-color);
+}
+
+.diet-indicator.non-veg {
+  border: 1.5px solid var(--nonveg-color);
+}
+.diet-indicator.non-veg .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--nonveg-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
