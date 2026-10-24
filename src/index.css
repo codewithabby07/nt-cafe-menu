@@ -9,7 +9,7 @@
   --gold: #dfbd75;
   --gold-glow: rgba(223, 189, 117, 0.25);
   --gold-lt: #f5e4b8;
-  --border: rgba(223, 189, 117, 0.18);
+  --border: rgba(223, 189, 117, 0.2);
   --white: #ffffff;
   --gray: #9ca3af;
   --gray2: #4b5563;
@@ -67,11 +67,164 @@ body {
   scrollbar-width: none;
 }
 
-/* --- ANTILIA STYLED MENU COMPONENTS --- */
+/* --- ANTILIA GRAND HEADER STYLES --- */
+.antilia-header-wrap {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 2.2rem 1.2rem 1.8rem;
+  background: radial-gradient(ellipse 90% 70% at 50% 25%, rgba(223, 189, 117, 0.12) 0%, transparent 75%),
+              linear-gradient(180deg, #050a14 0%, #081120 100%);
+  border-bottom: 1px solid var(--border);
+}
 
-/* Menu Section Heading */
+.antilia-logo-wrap {
+  margin-bottom: 1.2rem;
+}
+
+.antilia-logo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 25px var(--gold-glow), 0 0 50px rgba(223, 189, 117, 0.15);
+  object-fit: cover;
+  background: #091322;
+  margin: 0 auto;
+  padding: 2px;
+}
+
+.antilia-logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.antilia-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.2rem, 8vw, 3.2rem);
+  letter-spacing: 0.08em;
+  color: #fff;
+  line-height: 1.05;
+  margin-bottom: 0.35rem;
+  font-weight: 900;
+  text-shadow: 0 0 35px var(--gold-glow);
+}
+
+.antilia-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.antilia-tagline {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #ede4ce;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.antilia-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0.6rem auto 1.4rem;
+  max-width: 220px;
+}
+
+.antilia-divider::before,
+.antilia-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold));
+}
+
+.antilia-divider::after {
+  background: linear-gradient(to left, transparent, var(--gold));
+}
+
+.antilia-divider span {
+  color: var(--gold);
+  font-size: 0.85rem;
+}
+
+/* Antilia Action Grid */
+.antilia-cta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  max-width: 540px;
+  margin: 0 auto 1rem;
+}
+
+@media (max-width: 520px) {
+  .antilia-cta-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.antilia-cta-sec {
+  padding: 0.75rem 0.6rem;
+  background: rgba(223, 189, 117, 0.07);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.antilia-cta-sec:hover {
+  background: rgba(223, 189, 117, 0.16);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px var(--gold-glow);
+}
+
+.antilia-cta-sec:active {
+  transform: scale(0.97);
+}
+
+.antilia-cta-icon {
+  font-size: 1.25rem;
+  color: var(--gold);
+}
+
+.antilia-badge {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(223, 189, 117, 0.08);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+/* --- MENU SECTION --- */
 .menu-section {
-  padding: 1rem 0;
+  padding: 1.2rem 0;
 }
 
 .menu-section-title {
@@ -122,14 +275,14 @@ body {
 
 @media (max-width: 400px) {
   .item-card-img {
-    width: 90px;
-    min-height: 90px;
+    width: 92px;
+    min-height: 92px;
   }
 }
 
 .item-card-body {
   flex: 1;
-  padding: 0.75rem 0.85rem;
+  padding: 0.8rem 0.9rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -186,7 +339,7 @@ body {
 }
 
 .item-card-name {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: #fff;
   margin-bottom: 0.15rem;
@@ -210,7 +363,7 @@ body {
 }
 
 .item-card-price {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   font-weight: 800;
   color: var(--gold);
   font-family: 'Cinzel', serif;
@@ -243,7 +396,7 @@ body {
 
 /* Featured / House Specials Horizontal Carousel (Antilia style) */
 .featured-section {
-  padding: 0.75rem 0 1.25rem;
+  padding: 0.8rem 0 1.25rem;
 }
 
 .featured-scroll {
